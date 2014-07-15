@@ -1,0 +1,29 @@
+{
+    "name": "Restaurant",
+    "version": "1.0.0",
+    "author": "Guillaume",
+    "enabled": 1,
+    "pypi-url": "xxxx",
+    "github-url": "xxxx",
+    "description": [
+        {"lang": "fr", "description": "Ce plugin permet gérer les demandes clients pour le restaurant d'un hotel"}
+    ],
+    "lang": ["fr"],
+    "configuration": {
+        "intents": {
+            "hotel_restau_reserve": {
+                "method": "reserveRestau",
+                "corpus": {}
+            },
+           "hotel_restau_gettime": {
+                "method": "gettimeRestau",
+                "corpus": {}
+            },
+            "hotel_restau_getmenu": {
+                "method": "getmenuRestau",
+                "corpus": {}
+            }
+        }
+    }
+}
+
