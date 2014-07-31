@@ -17,58 +17,58 @@ msgstr ""
 
 #----------get menu
 msgid "not yet"
-msgstr  "(10,\"Je ne connais pas encore le menu à cette date.\"),"
-        "(10,\"Je ne connais pas encore le menu.\"),"
-        "(10,\"Le menu n'est pas encore défini.\")"
+msgstr  "(10, \"Je ne connais pas encore le menu à cette date.\"),"
+        "(10, \"Je ne connais pas encore le menu.\"),"
+        "(10, \"Le menu n'est pas encore défini.\"),"
 
 
 msgid "previous date"
-msgstr "(10,\"Je ne peux pas vous donner le menu des jours précedents.\"),"
-        "(10,\"Je ne connais pas le menu des jours passés.\")"
+msgstr  "(10, \"Je ne peux pas vous donner le menu des jours précedents.\"),"
+        "(10, \"Je ne connais pas le menu des jours passés.\"),"
 
 
 msgid "menu"
-msgstr "(10,\"Ce {moment} le menu est {menu}.\"),"
-    "(10,\"Pour ce {moment} le menu est {menu}.\"),"
-    "(10,\"Le menu de ce {moment} est {menu}.\"),"
-    "(10,\"Au menu de ce {moment} vous aurez {menu}.\"),"
-    "(10,\"Ce {moment} le chef vous propose {menu}.\"),"
-    "(10,\"Le chef vous propose ce {moment} {menu}.\")"
-    
+msgstr  "(10,\"Ce {moment} le menu est {menu}.\"),"
+        "(10,\"Pour ce {moment} le menu est {menu}.\"),"
+        "(10,\"Le menu de ce {moment} est {menu}.\"),"
+        "(10,\"Au menu de ce {moment} vous aurez {menu}.\"),"
+        "(10,\"Ce {moment} le chef vous propose {menu}.\"),"
+        "(10,\"Le chef vous propose ce {moment} {menu}.\"),"
+
 
 #----------get time
 msgid "opening"
 msgstr "(10,\"Le {moment} le restaurant est ouvert de {starttime} à {stoptime}.\"),"
-    "(10,\"Le restaurant est ouvert de {starttime} à {stoptime}.\"),"
-    "(10,\"Le {moment} le restaurant vous acceuille de {starttime} à {stoptime}.\"),"
-    "(10,\"Le {moment} le restaurant sert de {starttime} à {stoptime}.\"),"
-    "(10,\"Le restaurant sert de {starttime} à {stoptime}.\")"
+        "(10,\"Le restaurant est ouvert de {starttime} à {stoptime}.\"),"
+        "(10,\"Le {moment} le restaurant vous acceuille de {starttime} à {stoptime}.\"),"
+        "(10,\"Le {moment} le restaurant sert de {starttime} à {stoptime}.\"),"
+        "(10,\"Le restaurant sert de {starttime} à {stoptime}.\"),"
 
-    
+
 
 #----------moment
 
 msgid "morning"
-msgstr "(10,\" matin \"),"
-    "(10,\" matin \")"
+msgstr  "(10,\" matin \"),"
+        "(10,\" matin \"),"
 
 msgid "midday"
-msgstr "(10,\" midi \"),"
-      "(10,\" midi \")"
+msgstr  "(10,\" midi \"),"
+        "(10,\" midi \"),"
 
 msgid "evening"
-msgstr "(10,\" soir \"),"
-    "(10,\" soir \")"
+msgstr  "(10,\" soir \"),"
+        "(10,\" soir \"),"
 
 #---time
 msgid "hour"
-msgstr " heure "
+msgstr  " heure "
 
 msgid "minute"
-msgstr " minute "
+msgstr  " minute "
 
 msgid "second"
-msgstr " seconde "
+msgstr  " seconde "
 
 msgid "and"
-msgstr " et "
+msgstr  " et "
