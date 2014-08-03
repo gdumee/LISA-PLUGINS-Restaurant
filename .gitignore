@@ -27,7 +27,12 @@ pip-log.txt
 nosetests.xml
 
 # Translations
+<<<<<<< HEAD
 #*.mo
+=======
+*.pot
+*~
+>>>>>>> b7ce16fcd8459176a918244bd33ac873dc816718
 
 # Mr Developer
 .mr.developer.cfg
