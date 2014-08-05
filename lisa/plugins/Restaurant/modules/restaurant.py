@@ -98,25 +98,27 @@ class Restaurant(IPlugin):
     #-----------------------------------------------------------------------------
     #              privates functions
     #-----------------------------------------------------------------------------
-    def _getmenu(self,pMoment) :
+    def _getmenu(self,part) :
         """
         get menu
         """
+        if part == 'alltheday' :
+            message = self._('no-menu')
+        else  :
+            menu = {
+            u'name': u'Restaurant',
+            u'menu': {
+                u'morning':{u'plat' : u'petit déjeuner à la française'},
+                u'midday': {u'plat' : u'bavette et frites et dessert du jour'},
+                u'evening': {u'plat' : u'soupe de poisson et ses croutons'}
+            }
+            }
+            message = self._('menu').format(moment=self._(part),menu=menu['menu'][part]['plat'])
         
-        menu = {
-        u'name': u'Restaurant',
-        u'menu': {
-            u'Matin': u'petit déjeuner à la française',
-            u'Midi': {u'plat' : u'bavette et frites et dessert du jour'},
-            u'Soir': {u'plat' : u'soupe de poisson et ses croutons'}
-        }
-        }
         
-        
-        message = self._('menu').format(moment=self._(pMoment),menu=menu['menu'][pMoment]['plat'])
         return message
     #-----------------------------------------------------------------------------
-    def _gettime(self,pMoment) :
+    def _gettime(self,part) :
         """
         get opening hours
         """
@@ -130,9 +132,9 @@ class Restaurant(IPlugin):
         },
         }
 
-        starttime = self.time2str(menu['heure'][pMoment]['depart'],pMinutes=0)
-        stoptime = self.time2str(menu['heure'][pMoment]['fin'],pMinutes=0)
-        message = self._('opening').format(moment=self._(pMoment),starttime = starttime,stoptime = stoptime)
+        starttime = self.time2str(menu['heure'][part]['depart'],pMinutes=0)
+        stoptime = self.time2str(menu['heure'][part]['fin'],pMinutes=0)
+        message = self._('opening').format(moment=self._(part),starttime = starttime,stoptime = stoptime)
         return message
 #-----------------------------------------------------------------------------
 # End of Plugin Restaurant class

@@ -34,7 +34,9 @@ msgstr "(10,\"Ce {moment} le menu est {menu}.\"),"
     "(10,\"Au menu de ce {moment} vous aurez {menu}.\"),"
     "(10,\"Ce {moment} le chef vous propose {menu}.\"),"
     "(10,\"Le chef vous propose ce {moment} {menu}.\")"
-    
+
+msgid "no-menu"
+msgstr "Veuillez préciser pour quel repas."
 
 #----------get time
 msgid "opening"
@@ -45,30 +47,3 @@ msgstr "(10,\"Le {moment} le restaurant est ouvert de {starttime} à {stoptime}.
     "(10,\"Le restaurant sert de {starttime} à {stoptime}.\")"
 
     
-
-#----------moment
-
-msgid "morning"
-msgstr "(10,\" matin \"),"
-    "(10,\" matin \")"
-
-msgid "midday"
-msgstr "(10,\" midi \"),"
-      "(10,\" midi \")"
-
-msgid "evening"
-msgstr "(10,\" soir \"),"
-    "(10,\" soir \")"
-
-#---time
-msgid "hour"
-msgstr " heure "
-
-msgid "minute"
-msgstr " minute "
-
-msgid "second"
-msgstr " seconde "
-
-msgid "and"
-msgstr " et "
