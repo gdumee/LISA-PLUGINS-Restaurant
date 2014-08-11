@@ -8,33 +8,26 @@
 #-----------------------------------------------------------------------------
 # copyright   : Neotique
 #-----------------------------------------------------------------------------
-
-
 # TODO : 
 
 #
 Version = "1.0.0"
 
-Verbose = True  #for debug
 
 
 #-----------------------------------------------------------------------------
 # Imports
 #-----------------------------------------------------------------------------
+#Mandatory
 from lisa.server.plugins.IPlugin import IPlugin
-
-
 import gettext
 import inspect
 import os
 
 
-from lisa.Neotique.NeoTrans import NeoTrans
+#ohters
 from lisa.Neotique.NeoConv import NeoConv
 
-
-
-#import datetime
 
 #-----------------------------------------------------------------------------
 # Plugin Restaurant class
@@ -44,10 +37,7 @@ class Restaurant(IPlugin):
     Plugin main class
     """
     def __init__(self):
-        super(Restaurant, self).__init__()
-        self.configuration_plugin = self.mongo.lisa.plugins.find_one({"name": "Restaurant"})
-        self.path = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile(inspect.currentframe()))[0],os.path.normpath("../lang/"))))
-        self._ = NeoTrans(domain='restaurant',localedir=self.path,fallback=True,languages=[self.configuration_lisa['lang']]).Trans
+        super(Restaurant, self).__init__(plugin_name = "Restaurant")
         self.WITDate = NeoConv(self._).WITDate
         self.time2str = NeoConv(self._).time2str
 
@@ -61,16 +51,15 @@ class Restaurant(IPlugin):
         #print jsonInput
         
         # Get informations
-        #dDate = {'end': '19:00', 'begin': '12:00', 'date': '2014-06-14', 'part': 'afternoon', 'part': 1}
         dDate = self.WITDate(jsonInput)
         
-        #ŋet menu
+        #get menu
         if dDate['delta'] < 0 :           #fatal
             return {"plugin": "Restaurant","method": "get_menuRestau","body": self._("previous date")}
         elif dDate['delta'] > 0 :        #fatal
             return {"plugin": "Restaurant","method": "get_menuRestau","body": self._("not yet")}
         else :                                #==0   get menu
-            menu = self._getmenu(dDate['part'])
+            menu = self._getmenu(part=dDate['part'],tpart=dDate['tpart'])
             return {"plugin": "Restaurant","method": "get_menuRestau","body": menu}
 
     #-----------------------------------------------------------------------------
@@ -81,7 +70,7 @@ class Restaurant(IPlugin):
         #print jsonInput
         dDate = self.WITDate(jsonInput)
         
-        message = self._gettime(dDate['part'])
+        message = self._gettime(part=dDate['part'],tpart=dDate['tpart'])
         return {"plugin": "Restaurant","method": "gettimeRestau","body": message}
  
     #-----------------------------------------------------------------------------
@@ -98,7 +87,7 @@ class Restaurant(IPlugin):
     #-----------------------------------------------------------------------------
     #              privates functions
     #-----------------------------------------------------------------------------
-    def _getmenu(self,part) :
+    def _getmenu(self,part,tpart) :
         """
         get menu
         """
@@ -113,32 +102,49 @@ class Restaurant(IPlugin):
                 u'evening': {u'plat' : u'soupe de poisson et ses croutons'}
             }
             }
-            message = self._('menu').format(moment=self._(part),menu=menu['menu'][part]['plat'])
+            message = self._('menu').format(moment=tpart,menu=menu['menu'][part]['plat'])
         
         
         return message
     #-----------------------------------------------------------------------------
-    def _gettime(self,part) :
+    def _gettime(self,part,tpart) :
         """
         get opening hours
         """
-        
-        menu = {
-        u'name': u'Restaurant',
-        u'heure': {
-            u'morning' : {u'depart': '06:00',u'fin' : '09:30'},
-            u'midday' : {u'depart' : '12:00',u'fin' : '14:00'},
-            u'evening' : {u'depart' : '18:10',u'fin': '21:30'}
-        },
-        }
-
-        starttime = self.time2str(menu['heure'][part]['depart'],pMinutes=0)
-        stoptime = self.time2str(menu['heure'][part]['fin'],pMinutes=0)
-        message = self._('opening').format(moment=self._(part),starttime = starttime,stoptime = stoptime)
+        message=''
+        if part == 'alltheday' :
+            for t in ('morning','midday','evening') :
+                menu = {
+                u'name': u'Restaurant',
+                u'heure': {
+                    u'morning' : {u'depart': '06:00',u'fin' : '09:30'},
+                    u'midday' : {u'depart' : '12:00',u'fin' : '14:00'},
+                    u'evening' : {u'depart' : '18:10',u'fin': '21:30'}
+                },
+                }
+                starttime = self.time2str(menu['heure'][t]['depart'],pMinutes=0)
+                stoptime = self.time2str(menu['heure'][t]['fin'],pMinutes=0)
+                message += self._('opening').format(moment=t,starttime = starttime,stoptime = stoptime)
+        else  :
+            menu = {
+            u'name': u'Restaurant',
+            u'heure': {
+                u'morning' : {u'depart': '06:00',u'fin' : '09:30'},
+                u'midday' : {u'depart' : '12:00',u'fin' : '14:00'},
+                u'evening' : {u'depart' : '18:10',u'fin': '21:30'}
+            },
+            }
+            starttime = self.time2str(menu['heure'][part]['depart'],pMinutes=0)
+            stoptime = self.time2str(menu['heure'][part]['fin'],pMinutes=0)
+            message = self._('opening').format(moment=tpart,starttime = starttime,stoptime = stoptime)
         return message
 #-----------------------------------------------------------------------------
 # End of Plugin Restaurant class
 #-----------------------------------------------------------------------------
+
+
+
+
 
 
 #-----------------------------------------------------------------------------
