@@ -15,7 +15,7 @@
                 "method": "reserveRestau",
                 "corpus": {}
             },
-           "hotel_restau_gettime": {
+           "hotel_restau_getopen": {
                 "method": "gettimeRestau",
                 "corpus": {}
             },
