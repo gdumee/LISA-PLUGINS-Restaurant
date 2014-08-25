@@ -8,7 +8,7 @@
 #-----------------------------------------------------------------------------
 # copyright   : Neotique
 #-----------------------------------------------------------------------------
-# TODO : 
+# TODO :
 
 #
 Version = "1.0.0"
@@ -38,21 +38,19 @@ class Restaurant(IPlugin):
     """
     def __init__(self):
         super(Restaurant, self).__init__(plugin_name = "Restaurant")
-        self.WITDate = NeoConv(self._).WITDate
-        self.time2str = NeoConv(self._).time2str
 
     #-----------------------------------------------------------------------------
     #              Publics  Fonctions
     #-----------------------------------------------------------------------------
     def getmenuRestau(self, jsonInput):
         """
-        get menu for evening, lunch, tomorrow...  
+        get menu for evening, lunch, tomorrow...
         """
         #print jsonInput
-        
+
         # Get informations
-        dDate = self.WITDate(jsonInput)
-        
+        dDate = NeoConv.WITDate(jsonInput)
+
         #get menu
         if dDate['delta'] < 0 :           #fatal
             return {"plugin": "Restaurant","method": "get_menuRestau","body": self._("previous date")}
@@ -65,14 +63,14 @@ class Restaurant(IPlugin):
     #-----------------------------------------------------------------------------
     def gettimeRestau(self, jsonInput):
         """
-        get opening hours 
+        get opening hours
         """
         #print jsonInput
-        dDate = self.WITDate(jsonInput)
-        
+        dDate = NeoConv.WITDate(jsonInput)
+
         message = self._gettime(part=dDate['part'],tpart=dDate['tpart'])
         return {"plugin": "Restaurant","method": "gettimeRestau","body": message}
- 
+
     #-----------------------------------------------------------------------------
     def reserveRestau(self, jsonInput):
         """
@@ -103,8 +101,8 @@ class Restaurant(IPlugin):
             }
             }
             message = self._('menu').format(moment=tpart,menu=menu['menu'][part]['plat'])
-        
-        
+
+
         return message
     #-----------------------------------------------------------------------------
     def _gettime(self,part,tpart) :
@@ -122,8 +120,8 @@ class Restaurant(IPlugin):
                     u'evening' : {u'depart' : '18:10',u'fin': '21:30'}
                 },
                 }
-                starttime = self.time2str(menu['heure'][t]['depart'],pMinutes=0)
-                stoptime = self.time2str(menu['heure'][t]['fin'],pMinutes=0)
+                starttime = NeoConv.time2str(menu['heure'][t]['depart'],pMinutes=0)
+                stoptime = NeoConv.time2str(menu['heure'][t]['fin'],pMinutes=0)
                 message += self._('opening').format(moment=t,starttime = starttime,stoptime = stoptime)
         else  :
             menu = {
@@ -134,8 +132,8 @@ class Restaurant(IPlugin):
                 u'evening' : {u'depart' : '18:10',u'fin': '21:30'}
             },
             }
-            starttime = self.time2str(menu['heure'][part]['depart'],pMinutes=0)
-            stoptime = self.time2str(menu['heure'][part]['fin'],pMinutes=0)
+            starttime = NeoConv.time2str(menu['heure'][part]['depart'],pMinutes=0)
+            stoptime = NeoConv.time2str(menu['heure'][part]['fin'],pMinutes=0)
             message = self._('opening').format(moment=tpart,starttime = starttime,stoptime = stoptime)
         return message
 #-----------------------------------------------------------------------------
@@ -151,8 +149,8 @@ class Restaurant(IPlugin):
 # Tests
 #-----------------------------------------------------------------------------
 if __name__ == "__main__" :
-  
-    hotel_restau_getmenu = {'from': u'Lisa-Web', 'zone': u'WebSocket', u'msg_id': u'67765841-b544-4896-89ea-52ab4dfb6001', 
+
+    hotel_restau_getmenu = {'from': u'Lisa-Web', 'zone': u'WebSocket', u'msg_id': u'67765841-b544-4896-89ea-52ab4dfb6001',
                     u'msg_body': u'quel est le menu ce soir',
                     u'outcome': {
                         u'entities': {
@@ -163,7 +161,7 @@ if __name__ == "__main__" :
                     },
                     'type': u'chat'
                 }
-    hotel_restau_getime = {'from': u'Lisa-Web', 'zone': u'WebSocket', u'msg_id': u'67765841-b544-4896-89ea-52ab4dfb6001', 
+    hotel_restau_getime = {'from': u'Lisa-Web', 'zone': u'WebSocket', u'msg_id': u'67765841-b544-4896-89ea-52ab4dfb6001',
                     u'msg_body': u'quel est le menu ce soir',
                     u'outcome': {
                         u'entities': {
@@ -176,11 +174,11 @@ if __name__ == "__main__" :
                 }
 
     essai =Restaurant() #class init
-    
+
     #ret = essai.getmenuRestau(hotel_restau_getmenu)
     ret = essai.gettimeRestau(hotel_restau_getime)
     print ret['body']
-    
+
 
 
 # --------------------- End of Minuteur.py  ---------------------
